@@ -21,23 +21,23 @@ namespace Events
             Console.ReadKey();
         }
 
-        static void a_MultipleOfFiveReached()
+        static void a_MultipleOfFiveReached(object sender, EventArgs e)
         {
             Console.WriteLine("Multiple of five reached!");
+            Console.WriteLine(sender.GetType());
         }
     }
 
     public class Adder
     {
-        public delegate void dgEventRaiser();
-        public event dgEventRaiser OnMultipleOfFiveReached;
+        public event EventHandler OnMultipleOfFiveReached;
 
         public int Add(int x, int y)
         {
             int iSum = x + y;
             if ((iSum % 5 == 0) && (OnMultipleOfFiveReached != null))
             {
-                OnMultipleOfFiveReached();
+                OnMultipleOfFiveReached(this, EventArgs.Empty);
             }
             return iSum;
         }
